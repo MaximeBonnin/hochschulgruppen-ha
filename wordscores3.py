@@ -91,14 +91,14 @@ class Wordscores:
         cleanFwv = temp
         
         # compute Sv = sum(Fwv * Sw)_{for all w}
-        Sv = cleanFwv.T.dot(cleanSw)
+        self.Sv = cleanFwv.T.dot(cleanSw)
         
-        # compute transformed Sv
-        Sv_t = (Sv - Sv.mean()) * (self.A_r.T.std() / Sv.std()) + Sv.mean()
+        # compute transformed self.Sv
+        self.Sv_t = (self.Sv - self.Sv.mean()) * (self.A_r.T.std() / self.Sv.std()) + self.Sv.mean()
         
         # compute Vv
         Vv = (cleanFwv * np.square((np.array(cleanSw) 
-                                    - np.array(Sv.T)))).sum(axis = 0)
+                                    - np.array(self.Sv.T)))).sum(axis = 0)
         
         # 1:1 merge absolute frequencies with Sw (to discard all disjoint words)
         temp = pd.merge(self.virginAbsFreq, self.S_w, on = 'word', how = 'inner')
@@ -110,31 +110,33 @@ class Wordscores:
         
         # compute standard errors and confidence intervals
         std_error = np.sqrt(Vv / N)
-        lower = np.array(Sv).flatten() - np.array((1.96 * std_error))
-        upper = np.array(Sv).flatten() + np.array((1.96 * std_error))
+        self.lower = np.array(self.Sv).flatten() - np.array((1.96 * std_error))
+        self.upper = np.array(self.Sv).flatten() + np.array((1.96 * std_error))
         
         # compute transformed confidence intervals
-        lower_t = (np.array(lower) - np.array(Sv.mean())) \
-                * np.array((self.A_r.T.std() / Sv.std())) \
-                + np.array(Sv.mean())
-        upper_t = (np.array(upper) - np.array(Sv.mean())) \
-                * np.array((self.A_r.T.std() / Sv.std())) \
-                + np.array(Sv.mean())
-        
+        self.lower_t = (np.array(self.lower) - np.array(self.Sv.mean())) \
+                * np.array((self.A_r.T.std() / self.Sv.std())) \
+                + np.array(self.Sv.mean())
+        self.upper_t = (np.array(self.upper) - np.array(self.Sv.mean())) \
+                * np.array((self.A_r.T.std() / self.Sv.std())) \
+                + np.array(self.Sv.mean())
+        return self.Sv
 
+        
+    def print_everything(self):
         # print everything
         print('\nOriginal scores (w/ 95CI):\n')
-        Sv['lower'] = lower
-        Sv['upper'] = upper
-        print(Sv)
+        self.Sv['lower'] = self.lower
+        self.Sv['upper'] = self.upper
+        print(self.Sv)
         print('\nTransformed scores (w/ 95CI):\n')
-        Sv_t['lower'] = lower_t
-        Sv_t['upper'] = upper_t
-        print(f"{Sv_t}\n")
+        self.Sv_t['lower'] = self.lower_t
+        self.Sv_t['upper'] = self.upper_t
+        print(f"{self.Sv_t}\n")
         
         # save transformed estimates to file
-        Sv_t.to_csv(opath + 'virginScores.csv', index_label = 'case')
-
+        self.Sv_t.to_csv(opath + 'virginScores.csv', index_label = 'case')
+        
 
 def main():
     print("Ran as main.")
