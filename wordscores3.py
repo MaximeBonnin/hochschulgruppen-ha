@@ -120,7 +120,7 @@ class Wordscores:
         self.upper_t = (np.array(self.upper) - np.array(self.Sv.mean())) \
                 * np.array((self.A_r.T.std() / self.Sv.std())) \
                 + np.array(self.Sv.mean())
-        return self.Sv
+        return self.Sv_t
 
         
     def print_everything(self):
