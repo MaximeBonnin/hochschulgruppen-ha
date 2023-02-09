@@ -125,23 +125,57 @@ class Wordscores:
         
     def print_everything(self):
         # print everything
-        print('\nOriginal scores (w/ 95CI):\n')
-        self.Sv['lower'] = self.lower
-        self.Sv['upper'] = self.upper
-        print(self.Sv)
-        print('\nTransformed scores (w/ 95CI):\n')
-        self.Sv_t['lower'] = self.lower_t
-        self.Sv_t['upper'] = self.upper_t
-        print(f"{self.Sv_t}\n")
+        print(f"{self.A_r=}")
+        print(f"{self.F_wr=}")
+        print(f"{self.F_wv=}")
+        print(f"{self.P_wr=}")
+        print(f"{self.P_wr=}")
+        print(f'{self.S_w.sort_values(by=["score"], ascending=False).head(20)=}')
+
+        temp = pd.merge(self.F_wr, self.S_w, on = 'word', how = 'inner')
+        temp["max_weight"] = temp[["LINKE", "AFD", "SPD", "FDP", "Grüne", "CDU"]].max(axis=1)
+        print(f"{temp.sort_values(by=['max_weight'], ascending=False).head(20)}")
+
+
+
+    
+
         
         # save transformed estimates to file
         self.Sv_t.to_csv(opath + 'virginScores.csv', index_label = 'case')
-        
+
+  
 
 def main():
     print("Ran as main.")
-    W = Wordscores(A_r=A_r)
-    W.run()
+
+    RILE_SCORES = {
+    "GRÜNE": (41113, 2.22, 2.95), # (party code, LR_economic, LR_social) 
+    "LINKE": (41223, 0.7, 2.67),
+    "SPD": (41320, 1.5, 4.53),
+    "FDP": (41420, 5.99, 3.52),
+    "CDU": (41521, 5.8, 6.37),
+    "AFD": (41953, 9.06, 8.15)
+    }
+
+    A_r_econ = pd.DataFrame({'LINKE': RILE_SCORES["LINKE"][1],
+                    'AFD': RILE_SCORES["AFD"][1],
+                    #"Linke": RILE_SCORES["LINKE"][1],
+                    "SPD": RILE_SCORES["SPD"][1],
+                    "FDP": RILE_SCORES["FDP"][1],
+                    "CDU": RILE_SCORES["CDU"][1],
+                    "Grüne": RILE_SCORES["GRÜNE"][1]},
+                    index = ['score'])
+
+    W = Wordscores(A_r=A_r_econ)
+
+
+    W = Wordscores(A_r=A_r_econ)
+
+    print(W.run())
+    W.print_everything()
+
+
 
 
 if __name__ == "__main__":
