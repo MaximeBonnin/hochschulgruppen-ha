@@ -10,5 +10,15 @@ Um eine sinnvolle Skalierung vorzunehmen ist die Auswahl der Referenztexte essen
 
 Die politische Verortung der Parteien basiert zunächst auf dem Manifesto Research on Political Representation (MARPOR). Dabei werden Wahlprogramme manuell in Teilsätze unterteilt und diese dann bestimmten Themen zugewiesen. Basierend auf den Anteilen der Themen können die Wahlprogramme dann auf einer Achse verortet und in Relation gesetzt werden. Der Datensatz für diese handkodierten Wahlprogramme beinhaltet somit Werte für jede Bundestagspartei.
 
+### Analyse
+
+![Heatmap](https://github.com/MaximeBonnin/hausarbeit/blob/master/graph1_normalisierte_wordscores_werte_komplett_heatmap.png)
+
+![RILE Axis](https://github.com/MaximeBonnin/hausarbeit/blob/master/Vergleich_RILE_MARPOR_vs_FnK.png)
+
 ### Ergebnisse
-[coming soon]
+
+Abschließend ist zu sagen, dass Hochschulgruppen zwar mehr als nur linke Positionen abbilden, Studierende mit ihrem Wahlverhalten aber im Mittel linke Positionen ausdrücken. Die Frage nach ideologischen Problemen an Hochschulen, welche in den Medien aufgeworfen werden, sollten somit nicht ignoriert werden, sind aber in ihrem Ausmaß geringer als oft dargestellt.
+
+Weiterführend wäre eine Analyse von mehr Hochschulgruppen an anderen Universitäten nötig, um die Ergebnisse allgemein zu bestätigen und Aussagen über systemische Probleme zu machen. Zudem ist der kausale Zusammenhang nicht eindeutig: werden Studierende politisch linker oder ziehen sie bereits linke Personen eher an?
+
