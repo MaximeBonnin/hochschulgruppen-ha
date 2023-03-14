@@ -1,6 +1,6 @@
 # Wo sind die Parteien der Hochschulwahlen 2023 in Göttingen im Vergleich zu Bundestagsparteien auf einer Links-Rechts Skala einzuordnen?
 ## Hausarbeit im Seminar Textanalyse WiSe 22/23
-Die komplette Hausarbeit ist als ``Textanalyse_Hausarbeit.docx`` ebenfalls in diesem Repository zu finden. 
+Die komplette Hausarbeit ist als [Textanalyse_Hausarbeit.docx](https://github.com/MaximeBonnin/hausarbeit/blob/master/Textanalyse_Hausarbeit.docx) ebenfalls in diesem Repository zu finden. 
 ### Methoden
 Für die Analyse wird die „Wordscores“ Methode ([Laver et al. 2003](https://www.cambridge.org/core/journals/american-political-science-review/article/extracting-policy-positions-from-political-texts-using-words-as-data/4F4676E80A79E01EAAB88EF3F2D1B733)) verwendet. Dabei handelt es sich um einen Algorithmus, welcher die Häufigkeit, mit welcher die gleichen Worte in verschiedenen Texten vorkommen zählt. Anschließend wird anhand von Referenztexten und -werten – in diesem Fall den Wahlprogrammen der Bundestagsparteien und deren MARPOR Werten – eine Skalierung vorgenommen um die Texte basierend auf ihrer Ähnlichkeit auf einer Ache zu platzieren.
 
